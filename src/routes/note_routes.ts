@@ -1,19 +1,19 @@
 import { Elysia, t } from "elysia";
 
 import { prisma } from "../utils/prisma";
+import { noteService } from "../infrastructure/ioc/container";
 
 export const noteRouter = new Elysia({ prefix: "/notes" })
 
   //routes
   .get("/", async () => {
-    const notes = await prisma.note.findMany();
-
+    const notes = await noteService.getAll();
     return notes;
   })
 
   .get("/:id", async ({ params }) => {
     const { id } = params;
-    const note = await prisma.note.findFirst({ where: { id } });
+    const note = await noteService.getById(id);
     return note;
   })
 
