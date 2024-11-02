@@ -1,0 +1,15 @@
+### Get root
+GET http://localhost:3000
+
+
+#### Create post
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+    "body": "Kece banget",
+    "tags":""
+}
+
+### Get post detail
+GET http://localhost:3000/posts/akoj
