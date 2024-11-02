@@ -9,7 +9,10 @@
     "@elysiajs/swagger": "^1.1.5",
     "@prisma/client": "^5.21.1",
     "elysia": "latest",
-    "prisma": "^5.21.1"
+    "inversify": "^6.0.3",
+    "prisma": "^5.21.1",
+    "reflect-metadata": "^0.2.2",
+    "winston": "^3.16.0"
   },
   "devDependencies": {
     "bun-types": "latest"

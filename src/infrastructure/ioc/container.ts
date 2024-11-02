@@ -1,5 +1,17 @@
+import { Container } from "inversify";
+import { TYPES } from "../../interfaces/types";
 import { NoteRepo } from "../database/note.repo";
 import { NoteService } from "../../application/note.service";
+import { LoggerDev } from "../logger/logger.dev";
 
-const noteRepo = new NoteRepo();
-export const noteService = new NoteService(noteRepo);
+const container = new Container();
+
+// binding repo
+container.bind<NoteRepo>(TYPES.NoteRepo).to(NoteRepo);
+container.bind<LoggerDev>(TYPES.NoteRepo).to(LoggerDev);
+
+// binding services
+container.bind<NoteService>(NoteService).toSelf();
+
+// instance
+export const noteService = container.get<NoteService>(NoteService);

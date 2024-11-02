@@ -1,5 +1,8 @@
+import { injectable } from "inversify";
 import { INote, Note } from "../../interfaces/entities";
+import "reflect-metadata";
 
+@injectable()
 export class NoteRepo implements INote {
   async getAll(): Promise<Note[]> {
     return [];
