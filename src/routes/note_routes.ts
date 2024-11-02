@@ -2,7 +2,7 @@ import { Elysia, t } from "elysia";
 
 import { prisma } from "../utils/prisma";
 
-export const postRouter = new Elysia({ prefix: "/notes" })
+export const noteRouter = new Elysia({ prefix: "/notes" })
 
   //routes
   .get("/", async () => {

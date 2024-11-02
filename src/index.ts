@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
 import { userRouter } from "./routes/user_routes";
-import { postRouter } from "./routes/note_routes";
+import { noteRouter } from "./routes/note_routes";
 import swagger from "@elysiajs/swagger";
 
 const app = new Elysia()
@@ -18,7 +18,7 @@ const app = new Elysia()
 
       //routes
       .use(userRouter)
-      .use(postRouter)
+      .use(noteRouter)
   )
 
   .get("/", (ctx) => {
