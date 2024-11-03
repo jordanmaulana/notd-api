@@ -8,7 +8,7 @@ const container = new Container();
 
 // binding repo
 container.bind<NoteRepo>(TYPES.NoteRepo).to(NoteRepo);
-container.bind<LoggerDev>(TYPES.NoteRepo).to(LoggerDev);
+container.bind<LoggerDev>(TYPES.Logger).to(LoggerDev);
 
 // binding services
 container.bind<NoteService>(NoteService).toSelf();
