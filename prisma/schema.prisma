@@ -18,6 +18,8 @@ model Note {
   content   String
   isPrivate Boolean @default(true)
   tags      Tag[]
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
 }
 
 model Tag {
@@ -25,6 +27,8 @@ model Tag {
   name   String
   noteId String
   note   Note   @relation(fields: [noteId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model User {
@@ -32,6 +36,8 @@ model User {
   email    String    @unique
   password String
   sessions Session[]
+  notes    Note[]
+  tags     Tag[]
 }
 
 model Session {

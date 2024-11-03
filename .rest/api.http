@@ -1,15 +1,30 @@
 ### Get root
 GET http://localhost:3000
 
-
-#### Create post
-POST http://localhost:3000/posts
+### Register
+POST http://localhost:3000/v1/register
 Content-Type: application/json
 
 {
-    "body": "Kece banget",
-    "tags":""
+    "email":"demo@gmail.com",
+    "password": "admin123"
 }
+
+### Login
+POST http://localhost:3000/v1/login
+Content-Type: application/json
+
+{
+    "email":"demo@gmail.com",
+    "password": "admin123"
+}
+
+
+#### Get notes
+GET http://localhost:3000/v1/notes
+Content-Type: application/json
+# session-id: cm30zuojy000256wbpqlox23a
+
 
 ### Get post detail
 GET http://localhost:3000/posts/akoj

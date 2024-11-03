@@ -3,18 +3,13 @@ import { userRouter } from "./routes/user_routes";
 import { noteRouter } from "./routes/note_routes";
 import swagger from "@elysiajs/swagger";
 import { authRouter } from "./routes/auth_routes";
+import { prisma } from "./utils/prisma";
 
 const app = new Elysia()
 
   .use(swagger({ path: "/docs" }))
 
-  .onBeforeHandle(() => {
-    console.log("before handle hooks");
-
-    // Authorization
-  })
-
-  .group("/api/v1", (app) =>
+  .group("/v1", (app) =>
     app
 
       //routes
