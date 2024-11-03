@@ -19,9 +19,7 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
 
   .delete("/:id", async ({ params }) => {
     const { id } = params;
-
     await prisma.note.delete({ where: { id } });
-
     return { message: `Note deleted` };
   })
 
@@ -56,7 +54,6 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
       return { message: "Create post" };
     },
     {
-      // Schema Guard
       body: t.Object({
         content: t.String(),
         isPrivate: t.Boolean(),

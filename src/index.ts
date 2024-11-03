@@ -2,6 +2,7 @@ import { Elysia } from "elysia";
 import { userRouter } from "./routes/user_routes";
 import { noteRouter } from "./routes/note_routes";
 import swagger from "@elysiajs/swagger";
+import { authRouter } from "./routes/auth_routes";
 
 const app = new Elysia()
 
@@ -19,11 +20,8 @@ const app = new Elysia()
       //routes
       .use(userRouter)
       .use(noteRouter)
+      .use(authRouter)
   )
-
-  .get("/", (ctx) => {
-    return { message: "Hello Elysia" };
-  })
 
   .listen(3000);
 
