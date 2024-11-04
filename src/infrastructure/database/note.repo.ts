@@ -14,7 +14,12 @@ export class NoteRepo implements INote {
     const note = await prisma.note.findFirst({ where: { id } });
     return note;
   }
-  //   create: (data: Omit<Note, "id">) => Promise<Note>;
+  async create(data: Omit<Note, "id">): Promise<Note> {
+    const newNote = await prisma.note.create({
+      data,
+    });
+    return newNote;
+  }
   //   update: (id: string, data: Partial<Note>) => Promise<Note>;
   //   delete: (id: string) => void;
 }

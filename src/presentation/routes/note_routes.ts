@@ -2,6 +2,8 @@ import { Elysia, t } from "elysia";
 import { prisma } from "../../utils/prisma";
 import { noteService } from "../../infrastructure/ioc/container";
 import { validateSession } from "../controllers/auth_controller";
+import { Note } from "@prisma/client";
+import { CreateNoteSchema } from "../../application/note.service";
 
 export const noteRouter = new Elysia({ prefix: "/notes" })
   .derive(async (context) => {
@@ -31,22 +33,12 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
 
   .post(
     "/",
-    async ({ body, set, userId }) => {
-      const { content } = body;
-
-      const newNote = await prisma.note.create({
-        data: { content, userId: userId! },
-      });
-
-      set.status = 201;
-      return newNote;
+    async (context) => {
+      const { userId } = context;
+      const note = await noteService.create({ context, userId: userId! });
+      return note;
     },
-    {
-      // Schema Guard
-      body: t.Object({
-        content: t.String(),
-      }),
-    }
+    CreateNoteSchema
   )
 
   .patch(

@@ -6,6 +6,7 @@
 
 // Migration command:
 // bunx prisma migrate dev --name dev
+// bunx prisma studio
 
 generator client {
   provider = "prisma-client-js"
