@@ -32,7 +32,8 @@ Content-Type: application/json
 session-id: cm3126u8h00029uqh48avmfrk
 
 {
-    "content": "TestNote2"
+    "content": "Music + Lofi + Coffee + Rain #cozy #life https://www.youtube.com/watch?v=2fQyuhzfBYk",
+    "isPrivate": true
 }
 
 

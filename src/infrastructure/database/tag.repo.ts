@@ -15,10 +15,8 @@ export class TagRepo {
     return data;
   }
   async create(data: Omit<Tag, "id">): Promise<Tag> {
-    const newData = await prisma.tag.upsert({
-      where: { name: data.name },
-      update: {}, // Do nothing if it exists
-      create: data,
+    const newData = await prisma.tag.create({
+      data,
     });
     return newData;
   }
