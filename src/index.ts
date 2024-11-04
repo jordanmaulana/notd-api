@@ -1,12 +1,10 @@
-import { Elysia } from "elysia";
-import { userRouter } from "./routes/user_routes";
-import { noteRouter } from "./routes/note_routes";
+import { Elysia, error } from "elysia";
+import { userRouter } from "./presentation/routes/user_routes";
+import { noteRouter } from "./presentation/routes/note_routes";
 import swagger from "@elysiajs/swagger";
-import { authRouter } from "./routes/auth_routes";
-import { prisma } from "./utils/prisma";
+import { authRouter } from "./presentation/routes/auth_routes";
 
 const app = new Elysia()
-
   .use(swagger({ path: "/docs" }))
 
   .group("/v1", (app) =>

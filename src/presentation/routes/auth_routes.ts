@@ -1,5 +1,5 @@
 import { Elysia, t } from "elysia";
-import { prisma } from "../utils/prisma";
+import { prisma } from "../../utils/prisma";
 
 export const authRouter = new Elysia()
 

@@ -23,7 +23,17 @@ Content-Type: application/json
 #### Get notes
 GET http://localhost:3000/v1/notes
 Content-Type: application/json
-# session-id: cm30zuojy000256wbpqlox23a
+session-id: cm3126u8h00029uqh48avmfrk
+
+### Create note
+
+POST http://localhost:3000/v1/notes
+Content-Type: application/json
+session-id: cm3126u8h00029uqh48avmfrk
+
+{
+    "content": "TestNote"
+}
 
 
 ### Get post detail
