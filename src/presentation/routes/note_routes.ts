@@ -3,7 +3,7 @@ import { prisma } from "../../utils/prisma";
 import { noteService } from "../../infrastructure/ioc/container";
 import { validateSession } from "../controllers/auth_controller";
 import { Note } from "@prisma/client";
-import { CreateNoteSchema } from "../../application/note.service";
+import { CreateNoteSchema } from "../../application/note/note.service";
 
 export const noteRouter = new Elysia({ prefix: "/notes" })
   .derive(async (context) => {
@@ -14,10 +14,33 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
     return { userId };
   })
 
-  .get("/", async ({}) => {
-    const notes = await noteService.getAll();
-    return notes;
-  })
+  .get(
+    "/",
+    async ({ query, userId }) => {
+      const { search } = query;
+      console.log(query);
+      console.log(search);
+      const notes = await noteService.getAll({ search, userId: userId! });
+      return notes;
+    },
+    {
+      query: t.Object(
+        {
+          search: t.Optional(
+            t.String({
+              description:
+                "Narrow down notes by one or more tags. Example: #food #nasigoreng",
+            })
+          ),
+        },
+        {
+          examples: {
+            query: "#food #nasigoreng",
+          },
+        }
+      ),
+    }
+  )
 
   .get("/:id", async ({ params }) => {
     const { id } = params;

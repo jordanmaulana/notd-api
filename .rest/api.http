@@ -21,7 +21,7 @@ Content-Type: application/json
 
 
 #### Get notes
-GET http://localhost:3000/v1/notes
+GET http://localhost:3000/v1/notes?search=%23life
 Content-Type: application/json
 session-id: cm3126u8h00029uqh48avmfrk
 
@@ -32,7 +32,7 @@ Content-Type: application/json
 session-id: cm3126u8h00029uqh48avmfrk
 
 {
-    "content": "Music + Lofi + Coffee + Rain #cozy #life https://www.youtube.com/watch?v=2fQyuhzfBYk",
+    "content": "Music + Lofi + Coffee + Rain #cozy #coffee https://www.youtube.com/watch?v=2fQyuhzfBYk",
     "isPrivate": true
 }
 

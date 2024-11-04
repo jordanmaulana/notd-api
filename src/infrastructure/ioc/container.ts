@@ -1,7 +1,7 @@
 import { Container } from "inversify";
 import { TYPES } from "../../interfaces/types";
 import { NoteRepo } from "../database/note.repo";
-import { NoteService } from "../../application/note.service";
+import { NoteService } from "../../application/note/note.service";
 import { LoggerDev } from "../logger/logger.dev";
 import { TagRepo } from "../database/tag.repo";
 

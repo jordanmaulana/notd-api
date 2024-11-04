@@ -1,17 +1,13 @@
 import { inject, injectable } from "inversify";
-import { NoteRepo } from "../infrastructure/database/note.repo";
+import { NoteRepo } from "../../infrastructure/database/note.repo";
 import "reflect-metadata";
-import { TYPES } from "../interfaces/types";
-import { LoggerDev } from "../infrastructure/logger/logger.dev";
-import { Context, t } from "elysia";
+import { TYPES } from "../../interfaces/types";
+import { LoggerDev } from "../../infrastructure/logger/logger.dev";
+import { t } from "elysia";
 import { Note, Tag } from "@prisma/client";
 import { extractHashTags } from "./note.lib";
-import { TagRepo } from "../infrastructure/database/tag.repo";
-
-interface CreateNoteProps {
-  context: Context;
-  userId: string;
-}
+import { TagRepo } from "../../infrastructure/database/tag.repo";
+import { CreateNoteProps, GetNotesProps } from "./note.props";
 
 export const CreateNoteSchema = {
   // Schema Guard
@@ -37,8 +33,12 @@ export class NoteService {
     this.tagRepo = tagRepo;
   }
 
-  getAll() {
-    return this.noteRepo.getAll();
+  getAll(props: GetNotesProps) {
+    const { search } = props;
+    if (search) {
+      this.logger.info(`${props.userId} queried\n${search}`);
+    }
+    return this.noteRepo.getAll(props);
   }
 
   getById(id: string) {
