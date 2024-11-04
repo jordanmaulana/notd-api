@@ -4,8 +4,9 @@ import "reflect-metadata";
 import { TYPES } from "../interfaces/types";
 import { LoggerDev } from "../infrastructure/logger/logger.dev";
 import { Context, t } from "elysia";
-import { Note } from "@prisma/client";
+import { Note, Tag } from "@prisma/client";
 import { extractHashTags } from "./note.lib";
+import { TagRepo } from "../infrastructure/database/tag.repo";
 
 interface CreateNoteProps {
   context: Context;
@@ -23,14 +24,17 @@ export const CreateNoteSchema = {
 @injectable()
 export class NoteService {
   private noteRepo: NoteRepo;
+  private tagRepo: TagRepo;
   private logger: LoggerDev;
 
   constructor(
     @inject(TYPES.NoteRepo) noteRepo: NoteRepo,
-    @inject(TYPES.Logger) logger: LoggerDev
+    @inject(TYPES.Logger) logger: LoggerDev,
+    @inject(TYPES.TagRepo) tagRepo: TagRepo
   ) {
     this.noteRepo = noteRepo;
     this.logger = logger;
+    this.tagRepo = tagRepo;
   }
 
   getAll() {
@@ -55,6 +59,14 @@ export class NoteService {
     };
     const newNote = await this.noteRepo.create(data);
     const tags = extractHashTags(content);
+    tags.forEach(async (tag) => {
+      const data: Omit<Tag, "id"> = {
+        name: tag,
+        noteId: newNote.id,
+        userId: props.userId,
+      };
+      await this.tagRepo.create(data);
+    });
 
     set.status = 201;
     return newNote;

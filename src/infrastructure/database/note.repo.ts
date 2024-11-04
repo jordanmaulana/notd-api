@@ -1,11 +1,11 @@
 import { injectable } from "inversify";
-import { INote } from "../../interfaces/entities";
+
 import { prisma } from "../../utils/prisma";
 import { Note } from "@prisma/client";
 import "reflect-metadata";
 
 @injectable()
-export class NoteRepo implements INote {
+export class NoteRepo {
   async getAll(): Promise<Note[]> {
     return await prisma.note.findMany();
   }
