@@ -68,6 +68,8 @@ export class NoteService {
       await this.tagRepo.create(data);
     });
 
+    this.logger.info(`${props.userId} created a new note\n${newNote}`);
+
     set.status = 201;
     return newNote;
   }
