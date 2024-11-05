@@ -1,4 +1,4 @@
-import { Elysia, error } from "elysia";
+import { Elysia } from "elysia";
 import { userRouter } from "./presentation/routes/user_routes";
 import { noteRouter } from "./presentation/routes/note_routes";
 import swagger from "@elysiajs/swagger";

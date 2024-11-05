@@ -2,7 +2,7 @@ import { Elysia, t } from "elysia";
 import { prisma } from "../../utils/prisma";
 import { noteService } from "../../infrastructure/ioc/container";
 import { validateSession } from "../controllers/auth_controller";
-import { Note } from "@prisma/client";
+
 import { CreateNoteSchema } from "../../application/note/note.service";
 
 export const noteRouter = new Elysia({ prefix: "/notes" })
@@ -18,8 +18,6 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
     "/",
     async ({ query, userId }) => {
       const { search } = query;
-      console.log(query);
-      console.log(search);
       const notes = await noteService.getAll({ search, userId: userId! });
       return notes;
     },
@@ -76,7 +74,7 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
       });
 
       set.status = 200;
-      return { message: "Create post" };
+      return updatedNote;
     },
     {
       body: t.Object({

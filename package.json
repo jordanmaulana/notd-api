@@ -7,11 +7,16 @@
   },
   "dependencies": {
     "@elysiajs/swagger": "^1.1.5",
+    "@eslint/js": "^9.14.0",
     "@prisma/client": "^5.21.1",
+    "@types/eslint__js": "^8.42.3",
     "elysia": "latest",
+    "eslint": "^9.14.0",
     "inversify": "^6.0.3",
     "prisma": "^5.21.1",
     "reflect-metadata": "^0.2.2",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.13.0",
     "winston": "^3.16.0"
   },
   "devDependencies": {
