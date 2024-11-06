@@ -7,3 +7,10 @@ export const RegisterSchema = {
     password: t.String(),
   }),
 };
+
+export const LoginSchema = {
+  body: t.Object({
+    email: t.String(),
+    password: t.String(),
+  }),
+};

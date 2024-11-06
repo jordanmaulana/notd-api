@@ -1,6 +1,9 @@
-import { Elysia, t } from "elysia";
+import { Elysia } from "elysia";
 import { prisma } from "../../utils/prisma";
-import { RegisterSchema } from "../../application/auth/auth.schema";
+import {
+  LoginSchema,
+  RegisterSchema,
+} from "../../application/auth/auth.schema";
 import { authService } from "../../infrastructure/ioc/container";
 
 export const authRouter = new Elysia()
@@ -40,10 +43,5 @@ export const authRouter = new Elysia()
 
       return { sessionId: session.id };
     },
-    {
-      body: t.Object({
-        email: t.String(),
-        password: t.String(),
-      }),
-    }
+    LoginSchema
   );
