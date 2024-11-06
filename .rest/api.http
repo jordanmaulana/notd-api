@@ -7,7 +7,8 @@ Content-Type: application/json
 
 {
     "email":"demo@gmail.com",
-    "password": "admin123"
+    "password": "admin123",
+    "name": "Demo Account"
 }
 
 ### Login
@@ -21,15 +22,15 @@ Content-Type: application/json
 
 
 #### Get notes
-GET http://localhost:3000/v1/notes?search=%23life
+GET http://localhost:3000/v1/notes
 Content-Type: application/json
-session-id: cm3126u8h00029uqh48avmfrk
+session-id: cm35mt0wo0000hera20huzwha
+
 
 ### Create note
-
 POST http://localhost:3000/v1/notes
 Content-Type: application/json
-session-id: cm3126u8h00029uqh48avmfrk
+session-id: cm35m5lo20000fd97c8a1wlnt
 
 {
     "content": "Music + Lofi + Coffee + Rain #cozy #coffee https://www.youtube.com/watch?v=2fQyuhzfBYk",
@@ -37,5 +38,6 @@ session-id: cm3126u8h00029uqh48avmfrk
 }
 
 
-### Get post detail
-GET http://localhost:3000/posts/akoj
+### Delete note
+DELETE http://localhost:3000/v1/notes/cm35m5te10002fd97v2qce35o
+session-id: cm35m5lo20000fd97c8a1wlnt

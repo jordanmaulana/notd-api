@@ -3,19 +3,11 @@ import { NoteRepo } from "../../infrastructure/database/note.repo";
 import "reflect-metadata";
 import { TYPES } from "../../interfaces/types";
 import { LoggerDev } from "../../infrastructure/logger/logger.dev";
-import { t } from "elysia";
+
 import { Note, Tag } from "@prisma/client";
 import { extractHashTags } from "./note.lib";
 import { TagRepo } from "../../infrastructure/database/tag.repo";
 import { CreateNoteProps, GetNotesProps } from "./note.props";
-
-export const CreateNoteSchema = {
-  // Schema Guard
-  body: t.Object({
-    content: t.String(),
-    isPrivate: t.Boolean(),
-  }),
-};
 
 @injectable()
 export class NoteService {
@@ -45,6 +37,10 @@ export class NoteService {
     return this.noteRepo.getById(id);
   }
 
+  delete(id: string) {
+    return this.noteRepo.delete(id);
+  }
+
   async create(props: CreateNoteProps) {
     const { body, set } = props.context;
     const { content, isPrivate } = body as {
@@ -68,8 +64,7 @@ export class NoteService {
       await this.tagRepo.create(data);
     });
 
-    this.logger.info(`${props.userId} created a new note\n${newNote}`);
-
+    this.logger.info(`${props.userId} created a new note\n${content}`);
     set.status = 201;
     return newNote;
   }

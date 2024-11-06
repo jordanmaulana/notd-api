@@ -6,7 +6,7 @@ export const authRouter = new Elysia()
   .post(
     "/register",
     async ({ body, set }) => {
-      const { email, password } = body;
+      const { email, password, name } = body;
 
       let user = await prisma.user.findUnique({ where: { email } });
       if (user) {
@@ -16,7 +16,7 @@ export const authRouter = new Elysia()
 
       const hashedPassword = await Bun.password.hash(password, "argon2d");
       user = await prisma.user.create({
-        data: { email, password: hashedPassword },
+        data: { email, password: hashedPassword, name },
       });
 
       set.status = 201;
@@ -25,6 +25,7 @@ export const authRouter = new Elysia()
     {
       body: t.Object({
         email: t.String(),
+        name: t.String(),
         password: t.String(),
       }),
     }

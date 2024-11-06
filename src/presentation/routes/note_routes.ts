@@ -2,8 +2,10 @@ import { Elysia, t } from "elysia";
 import { prisma } from "../../utils/prisma";
 import { noteService } from "../../infrastructure/ioc/container";
 import { validateSession } from "../controllers/auth_controller";
-
-import { CreateNoteSchema } from "../../application/note/note.service";
+import {
+  GetNotesSchema,
+  CreateNoteSchema,
+} from "../../application/note/note.schema";
 
 export const noteRouter = new Elysia({ prefix: "/notes" })
   .derive(async (context) => {
@@ -21,23 +23,7 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
       const notes = await noteService.getAll({ search, userId: userId! });
       return notes;
     },
-    {
-      query: t.Object(
-        {
-          search: t.Optional(
-            t.String({
-              description:
-                "Narrow down notes by one or more tags. Example: #food #nasigoreng",
-            })
-          ),
-        },
-        {
-          examples: {
-            query: "#food #nasigoreng",
-          },
-        }
-      ),
-    }
+    GetNotesSchema
   )
 
   .get("/:id", async ({ params }) => {
@@ -48,7 +34,7 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
 
   .delete("/:id", async ({ params }) => {
     const { id } = params;
-    await prisma.note.delete({ where: { id } });
+    await noteService.delete(id);
     return { message: `Note deleted` };
   })
 

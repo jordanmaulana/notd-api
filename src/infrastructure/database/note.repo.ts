@@ -34,6 +34,12 @@ export class NoteRepo {
     const note = await prisma.note.findFirst({ where: { id } });
     return note;
   }
+
+  async delete(id: string): Promise<Note | null> {
+    const note = await prisma.note.delete({ where: { id } });
+    return note;
+  }
+
   async create(data: Omit<Note, "id">): Promise<Note> {
     const newNote = await prisma.note.create({
       data,
@@ -42,5 +48,4 @@ export class NoteRepo {
     return newNote;
   }
   //   update: (id: string, data: Partial<Note>) => Promise<Note>;
-  //   delete: (id: string) => void;
 }
