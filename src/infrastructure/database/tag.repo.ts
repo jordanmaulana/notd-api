@@ -23,3 +23,23 @@ export class TagRepo {
   //   update: (id: string, data: Partial<Note>) => Promise<Note>;
   //   delete: (id: string) => void;
 }
+
+// async function getTagsWithNoteCounts() {
+//   const tagsWithCounts = await prisma.tag.groupBy({
+//     by: ['id', 'name'],
+//     _count: {
+//       note: true, // Count the related notes
+//     },
+//   });
+
+//   // Format the response to match your desired structure
+//   const formattedResponse = tagsWithCounts.map(tag => ({
+//     tag: {
+//       id: tag.id,
+//       name: tag.name,
+//     },
+//     total: tag._count.note,
+//   }));
+
+//   return formattedResponse;
+// }

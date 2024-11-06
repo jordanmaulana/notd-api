@@ -1,34 +1,16 @@
 import { Elysia, t } from "elysia";
 import { prisma } from "../../utils/prisma";
+import { RegisterSchema } from "../../application/auth/auth.schema";
+import { authService } from "../../infrastructure/ioc/container";
 
 export const authRouter = new Elysia()
 
   .post(
     "/register",
-    async ({ body, set }) => {
-      const { email, password, name } = body;
-
-      let user = await prisma.user.findUnique({ where: { email } });
-      if (user) {
-        set.status = 400;
-        return { message: "User already registered" };
-      }
-
-      const hashedPassword = await Bun.password.hash(password, "argon2d");
-      user = await prisma.user.create({
-        data: { email, password: hashedPassword, name },
-      });
-
-      set.status = 201;
-      return { message: "User Registered Successfully" };
+    async (context) => {
+      return authService.register(context);
     },
-    {
-      body: t.Object({
-        email: t.String(),
-        name: t.String(),
-        password: t.String(),
-      }),
-    }
+    RegisterSchema
   )
 
   .post(

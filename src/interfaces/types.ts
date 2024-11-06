@@ -3,4 +3,5 @@ export const TYPES = {
   NoteService: Symbol.for("NoteService"),
   Logger: Symbol.for("Logger"),
   TagRepo: Symbol.for("TagRepo"),
+  UserRepo: Symbol.for("UserRepo"),
 };
