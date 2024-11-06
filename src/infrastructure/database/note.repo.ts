@@ -5,6 +5,8 @@ import { Note } from "@prisma/client";
 import "reflect-metadata";
 import { GetNotesProps } from "../../application/note/note.props";
 import { extractHashTags } from "../../application/note/note.lib";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { error } from "elysia";
 
 @injectable()
 export class NoteRepo {
@@ -36,8 +38,22 @@ export class NoteRepo {
   }
 
   async delete(id: string): Promise<Note | null> {
-    const note = await prisma.note.delete({ where: { id } });
-    return note;
+    try {
+      const note = await prisma.note.delete({ where: { id } });
+      return note;
+    } catch (e) {
+      /**
+       * Check if the error is due to the record not being found
+       * Docs:
+       * https://www.prisma.io/docs/orm/reference/error-reference#p2025
+       */
+      if (e instanceof PrismaClientKnownRequestError && e.code === "P2025") {
+        console.log(`Note with id ${id} not found`);
+        throw error(400, "Note not found");
+      } else {
+        throw error(500);
+      }
+    }
   }
 
   async create(data: Omit<Note, "id">): Promise<Note> {
