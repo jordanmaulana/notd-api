@@ -41,3 +41,7 @@ session-id: cm35m5lo20000fd97c8a1wlnt
 ### Delete note
 DELETE http://localhost:3000/v1/notes/cm35m5te10002fd97v2qce35o
 session-id: cm35m5lo20000fd97c8a1wlnt
+
+### Get profile
+GET http://localhost:3000/v1/users/profile
+session-id: cm38soos80000mqdw145fwaq8

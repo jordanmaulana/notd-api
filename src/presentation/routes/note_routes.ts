@@ -12,15 +12,15 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
     const whitelistedPath = ["/v1/login", "/v1/register"];
     if (whitelistedPath.includes(context.path)) return;
 
-    const { userId } = await validateSession(context);
-    return { userId };
+    const { user } = await validateSession(context);
+    return { user };
   })
 
   .get(
     "/",
-    async ({ query, userId }) => {
+    async ({ query, user }) => {
       const { search } = query;
-      const notes = await noteService.getAll({ search, userId: userId! });
+      const notes = await noteService.getAll({ search, userId: user!.id! });
       return notes;
     },
     GetNotesSchema
@@ -41,8 +41,8 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
   .post(
     "/",
     async (context) => {
-      const { userId } = context;
-      const note = await noteService.create({ context, userId: userId! });
+      const { user } = context;
+      const note = await noteService.create({ context, userId: user!.id });
       return note;
     },
     CreateNoteSchema

@@ -1,8 +1,9 @@
 import { Context, error } from "elysia";
 import { prisma } from "../../utils/prisma";
+import { User } from "@prisma/client";
 
 interface Session {
-  userId: string;
+  user: User;
 }
 
 export async function validateSession({ headers }: Context): Promise<Session> {
@@ -26,5 +27,5 @@ export async function validateSession({ headers }: Context): Promise<Session> {
    */
   const { user } = session!;
 
-  return { userId: user.id };
+  return { user };
 }
