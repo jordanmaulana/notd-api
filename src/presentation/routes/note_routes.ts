@@ -19,8 +19,12 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
   .get(
     "/",
     async ({ query, user }) => {
-      const { search } = query;
-      const notes = await noteService.getAll({ search, userId: user!.id! });
+      const { search, isPrivate } = query;
+      const notes = await noteService.getAll({
+        search,
+        userId: user!.id!,
+        isPrivate,
+      });
       return notes;
     },
     GetNotesSchema

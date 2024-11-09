@@ -5,48 +5,26 @@ import { Note } from "@prisma/client";
 import "reflect-metadata";
 import { GetNotesProps } from "../../application/note/note.props";
 import { extractHashTags } from "../../application/note/note.lib";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+
 import { error } from "elysia";
 import { userSerializer } from "../../interfaces/user";
-import { tagSerializer } from "../../interfaces/tag";
 
 @injectable()
 export class NoteRepo {
-  async getAll(props: GetNotesProps): Promise<Note[]> {
-    const { search, userId } = props;
-    if (!search)
-      return await prisma.note.findMany({
-        include: {
-          user: {
-            select: userSerializer,
-          },
-          tags: { select: tagSerializer },
-        },
-        where: {
-          userId: userId,
-        },
-      });
-
-    const tags = extractHashTags(search);
-    const notes = await prisma.note.findMany({
-      where: {
-        AND: tags.map((tagName) => ({
-          tags: {
-            some: {
-              name: tagName,
-            },
-          },
-        })),
-        userId: userId,
-      },
-      include: {
-        user: {
-          select: userSerializer,
-        },
-        tags: { select: tagSerializer },
-      },
-    });
-    return notes;
+  async getAll({ search, userId, isPrivate }: GetNotesProps): Promise<Note[]> {
+    const include = {
+      user: { select: userSerializer },
+    };
+    const where = search
+      ? {
+          AND: extractHashTags(search).map((tagName) => ({
+            tags: { some: { name: tagName } },
+          })),
+          userId,
+          isPrivate,
+        }
+      : { userId, isPrivate };
+    return await prisma.note.findMany({ where, include });
   }
 
   async getById(id: string): Promise<Note | null> {
@@ -55,22 +33,9 @@ export class NoteRepo {
   }
 
   async delete(id: string): Promise<Note | null> {
-    try {
-      const note = await prisma.note.delete({ where: { id } });
-      return note;
-    } catch (e) {
-      /**
-       * Check if the error is due to the record not being found
-       * Docs:
-       * https://www.prisma.io/docs/orm/reference/error-reference#p2025
-       */
-      if (e instanceof PrismaClientKnownRequestError && e.code === "P2025") {
-        console.log(`Note with id ${id} not found`);
-        throw error(400, "Note not found");
-      } else {
-        throw error(500);
-      }
-    }
+    const note = await prisma.note.findFirst({ where: { id } });
+    if (!note) throw error(400, "Note not found");
+    return await prisma.note.delete({ where: { id } });
   }
 
   async create(data: Omit<Note, "id">): Promise<Note> {

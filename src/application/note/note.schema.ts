@@ -14,8 +14,19 @@ export const GetNotesSchema = {
     search: t.Optional(
       t.String({
         description:
-          "Narrow down notes by one or more tags. Example: #food #nasigoreng",
+          "Narrow down by one or more tags. Example: #food #nasigoreng",
         examples: "#food #nasigoreng",
+      })
+    ),
+    isPrivate: t.Optional(
+      t.Boolean({
+        description: "Filter by its privacy. Example: true",
+        examples: "true | false",
+      })
+    ),
+    userId: t.Optional(
+      t.String({
+        description: "Filter by selected user id",
       })
     ),
   }),
