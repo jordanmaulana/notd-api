@@ -24,13 +24,13 @@ Content-Type: application/json
 #### Get notes
 GET http://localhost:3000/v1/notes
 Content-Type: application/json
-session-id: cm35mt0wo0000hera20huzwha
+session-id: cm38soos80000mqdw145fwaq8
 
 
 ### Create note
 POST http://localhost:3000/v1/notes
 Content-Type: application/json
-session-id: cm35m5lo20000fd97c8a1wlnt
+session-id: cm38soos80000mqdw145fwaq8
 
 {
     "content": "Music + Lofi + Coffee + Rain #cozy #coffee https://www.youtube.com/watch?v=2fQyuhzfBYk",

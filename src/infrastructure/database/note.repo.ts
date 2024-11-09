@@ -7,12 +7,22 @@ import { GetNotesProps } from "../../application/note/note.props";
 import { extractHashTags } from "../../application/note/note.lib";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { error } from "elysia";
+import { userSerializer } from "../../interfaces/user";
+import { tagSerializer } from "../../interfaces/tag";
 
 @injectable()
 export class NoteRepo {
   async getAll(props: GetNotesProps): Promise<Note[]> {
     const { search } = props;
-    if (!search) return await prisma.note.findMany();
+    if (!search)
+      return await prisma.note.findMany({
+        include: {
+          user: {
+            select: userSerializer,
+          },
+          tags: { select: tagSerializer },
+        },
+      });
 
     const tags = extractHashTags(search);
     const notes = await prisma.note.findMany({
@@ -26,7 +36,10 @@ export class NoteRepo {
         })),
       },
       include: {
-        tags: true, // Include tags to see the associated tags with each note
+        user: {
+          select: userSerializer,
+        },
+        tags: { select: tagSerializer },
       },
     });
     return notes;
