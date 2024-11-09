@@ -13,7 +13,7 @@ import { tagSerializer } from "../../interfaces/tag";
 @injectable()
 export class NoteRepo {
   async getAll(props: GetNotesProps): Promise<Note[]> {
-    const { search } = props;
+    const { search, userId } = props;
     if (!search)
       return await prisma.note.findMany({
         include: {
@@ -21,6 +21,9 @@ export class NoteRepo {
             select: userSerializer,
           },
           tags: { select: tagSerializer },
+        },
+        where: {
+          userId: userId,
         },
       });
 
@@ -34,6 +37,7 @@ export class NoteRepo {
             },
           },
         })),
+        userId: userId,
       },
       include: {
         user: {

@@ -6,9 +6,9 @@ POST http://localhost:3000/v1/register
 Content-Type: application/json
 
 {
-    "email":"demo@gmail.com",
+    "email":"demo2@gmail.com",
     "password": "admin123",
-    "name": "Demo Account"
+    "name": "Demo Account2"
 }
 
 ### Login
@@ -16,7 +16,7 @@ POST http://localhost:3000/v1/login
 Content-Type: application/json
 
 {
-    "email":"demo@gmail.com",
+    "email":"demo2@gmail.com",
     "password": "admin123"
 }
 
@@ -24,17 +24,17 @@ Content-Type: application/json
 #### Get notes
 GET http://localhost:3000/v1/notes
 Content-Type: application/json
-session-id: cm38soos80000mqdw145fwaq8
+session-id: cm39vxlck000114ouossvjvqu
 
 
 ### Create note
 POST http://localhost:3000/v1/notes
 Content-Type: application/json
-session-id: cm38soos80000mqdw145fwaq8
+session-id: cm39vxlck000114ouossvjvqu
 
 {
-    "content": "Music + Lofi + Coffee + Rain #cozy #coffee https://www.youtube.com/watch?v=2fQyuhzfBYk",
-    "isPrivate": true
+    "content": "aaaa #random",
+    "isPrivate": false
 }
 
 
