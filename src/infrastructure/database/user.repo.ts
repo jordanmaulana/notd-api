@@ -9,6 +9,9 @@ export class UserRepo {
   }
 
   async create(data: Omit<User, "id">): Promise<Omit<User, "password">> {
-    return await prisma.user.create({ data });
+    return await prisma.user.create({
+      data,
+      select: { email: true, name: true, id: true },
+    });
   }
 }

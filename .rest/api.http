@@ -6,9 +6,9 @@ POST http://localhost:3000/v1/register
 Content-Type: application/json
 
 {
-    "email":"demo2@gmail.com",
+    "email":"demo@gmail.com",
     "password": "admin123",
-    "name": "Demo Account2"
+    "name": "Jordan Maulana"
 }
 
 ### Login
