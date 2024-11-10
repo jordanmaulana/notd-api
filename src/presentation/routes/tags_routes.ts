@@ -1,13 +1,24 @@
 import { Elysia, t } from "elysia";
+import { prisma } from "../../utils/prisma";
 
 export const tagsRouter = new Elysia({ prefix: "/tags" })
 
   //routes
-  .get("/", () => {
-    return { message: `Get tags` };
+  .get("/", async () => {
+    const tagCounts = await prisma.tag.groupBy({
+      by: ["name"],
+      _count: {
+        name: true,
+      },
+    });
+
+    return tagCounts.map((tag) => ({
+      name: tag.name,
+      count: tag._count.name,
+    }));
   })
 
-  .get("/tags/:tagId", (ctx) => {
+  .get("/:tagId", (ctx) => {
     const postId = ctx.params.tagId;
     return { message: `Get posts id ${postId}` };
   })

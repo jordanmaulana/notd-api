@@ -45,3 +45,7 @@ session-id: cm35m5lo20000fd97c8a1wlnt
 ### Get profile
 GET http://localhost:3000/v1/users/profile
 session-id: cm38soos80000mqdw145fwaq8
+
+### Get tags
+GET http://localhost:3000/v1/tags
+session-id: cm3b9cdps0000du7wm54r559z
