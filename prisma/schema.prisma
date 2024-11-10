@@ -18,12 +18,13 @@ datasource db {
 }
 
 model Note {
-  id        String  @id @default(cuid())
+  id        String   @id @default(cuid())
   content   String
-  isPrivate Boolean @default(true)
+  isPrivate Boolean  @default(true)
   tags      Tag[]
   userId    String
-  user      User    @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 model Tag {
@@ -36,13 +37,14 @@ model Tag {
 }
 
 model User {
-  id       String    @id @default(cuid())
-  email    String    @unique
-  password String
-  name     String
-  sessions Session[]
-  notes    Note[]
-  tags     Tag[]
+  id        String    @id @default(cuid())
+  email     String    @unique
+  password  String
+  name      String
+  createdAt DateTime  @default(now())
+  sessions  Session[]
+  notes     Note[]
+  tags      Tag[]
 }
 
 model Session {

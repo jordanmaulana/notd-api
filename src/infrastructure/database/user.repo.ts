@@ -8,10 +8,12 @@ export class UserRepo {
     return await prisma.user.findUnique({ where: { email } });
   }
 
-  async create(data: Omit<User, "id">): Promise<Omit<User, "password">> {
+  async create(
+    data: Omit<User, "id" | "createdAt">
+  ): Promise<Omit<User, "password">> {
     return await prisma.user.create({
       data,
-      select: { email: true, name: true, id: true },
+      select: { email: true, name: true, id: true, createdAt: true },
     });
   }
 }

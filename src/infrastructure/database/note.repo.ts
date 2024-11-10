@@ -24,7 +24,11 @@ export class NoteRepo {
           isPrivate,
         }
       : { userId, isPrivate };
-    return await prisma.note.findMany({ where, include });
+    return await prisma.note.findMany({
+      where,
+      include,
+      orderBy: { createdAt: "desc" },
+    });
   }
 
   async getById(id: string): Promise<Note | null> {
