@@ -16,7 +16,7 @@ POST http://localhost:3000/v1/login
 Content-Type: application/json
 
 {
-    "email":"demo2@gmail.com",
+    "email":"demo@gmail.com",
     "password": "admin123"
 }
 
@@ -24,7 +24,7 @@ Content-Type: application/json
 #### Get notes
 GET http://localhost:3000/v1/notes
 Content-Type: application/json
-session-id: cm39vxlck000114ouossvjvqu
+session-id: cm3b6ymdl0004nwj6amevu4z3
 
 
 ### Create note

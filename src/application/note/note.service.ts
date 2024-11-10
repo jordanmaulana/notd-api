@@ -48,7 +48,7 @@ export class NoteService {
       isPrivate: boolean;
     };
 
-    const data: Omit<Note, "id"> = {
+    const data: Omit<Note, "id" | "createdAt"> = {
       content,
       userId: props.userId,
       isPrivate,

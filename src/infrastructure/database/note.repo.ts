@@ -42,12 +42,11 @@ export class NoteRepo {
     return await prisma.note.delete({ where: { id } });
   }
 
-  async create(data: Omit<Note, "id">): Promise<Note> {
+  async create(data: Omit<Note, "id" | "createdAt">): Promise<Note> {
     const newNote = await prisma.note.create({
       data,
       include: { tags: true },
     });
     return newNote;
   }
-  //   update: (id: string, data: Partial<Note>) => Promise<Note>;
 }
