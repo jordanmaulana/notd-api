@@ -13,7 +13,7 @@ export interface GetNotesProps {
    *
    * @param userId is selected user id.
    */
-  search?: string | undefined;
-  userId: string;
-  isPrivate?: boolean;
+  search?: string | null | undefined;
+  userId: string | null | undefined;
+  isPrivate?: boolean | null | undefined;
 }
