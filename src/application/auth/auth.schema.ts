@@ -6,6 +6,9 @@ export const RegisterSchema = {
     name: t.String(),
     password: t.String(),
   }),
+  detail: {
+    tags: ["Auth"],
+  },
 };
 
 export const LoginSchema = {
@@ -13,4 +16,7 @@ export const LoginSchema = {
     email: t.String(),
     password: t.String(),
   }),
+  detail: {
+    tags: ["Auth"],
+  },
 };

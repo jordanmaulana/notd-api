@@ -7,29 +7,29 @@ export const CreateNoteSchema = {
       description: "Setting it to False will make this note visible to public",
     }),
   }),
+  detail: {
+    tags: ["Notes"],
+  },
 };
 
 export const GetNotesSchema = {
   query: t.Optional(
     t.Object({
-      search: t.MaybeEmpty(
-        t.String({
-          description:
-            "Narrow down by one or more tags. Example: #food #nasigoreng",
-          examples: "#food #nasigoreng",
-        })
-      ),
-      isPrivate: t.MaybeEmpty(
-        t.Boolean({
-          description: "Filter by its privacy. Example: true",
-          examples: "true | false",
-        })
-      ),
-      userId: t.MaybeEmpty(
-        t.String({
-          description: "Filter by selected user id",
-        })
-      ),
+      search: t.String({
+        description:
+          "Narrow down by one or more tags. Example: #food #nasigoreng",
+        examples: "#food #nasigoreng",
+      }),
+      isPrivate: t.Boolean({
+        description: "Filter by its privacy. Example: true",
+        examples: "true | false",
+      }),
+      userId: t.String({
+        description: "Filter by selected user id",
+      }),
     })
   ),
+  detail: {
+    tags: ["Notes"],
+  },
 };

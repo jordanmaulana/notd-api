@@ -22,7 +22,7 @@ Content-Type: application/json
 
 
 #### Get notes
-GET http://localhost:3000/v1/notes?search=%23cozy
+GET http://localhost:3000/v1/notes?search=%23life
 Content-Type: application/json
 session-id: cm3b6ymdl0004nwj6amevu4z3
 

@@ -6,7 +6,14 @@ import { authRouter } from "./presentation/routes/auth_routes";
 import { tagsRouter } from "./presentation/routes/tags_routes";
 
 const app = new Elysia()
-  .use(swagger({ path: "/docs" }))
+  .use(
+    swagger({
+      path: "/docs",
+      documentation: {
+        tags: [{ name: "Auth" }, { name: "Notes" }],
+      },
+    })
+  )
 
   .group("/v1", (app) =>
     app
