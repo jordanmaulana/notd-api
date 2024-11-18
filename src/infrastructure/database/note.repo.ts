@@ -21,7 +21,6 @@ export class NoteRepo {
             tags: { some: { name: tagName } },
           })),
           userId,
-          isPrivate,
         }
       : { userId, isPrivate };
     return await prisma.note.findMany({

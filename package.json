@@ -22,7 +22,8 @@
     "winston": "^3.16.0"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "husky": "^9.1.6"
   },
   "module": "src/index.js"
 }
