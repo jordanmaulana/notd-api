@@ -23,10 +23,13 @@ export const GetNotesSchema = {
         })
       ),
       isPrivate: t.Optional(
-        t.Boolean({
-          description: "Filter by its privacy. Example: true",
-          examples: "true | false",
-        })
+        t.Union([
+          t.Boolean({
+            description: "Filter by its privacy. Example: true",
+            examples: "true | false",
+          }),
+          t.Undefined(),
+        ])
       ),
       userId: t.Optional(
         t.String({
