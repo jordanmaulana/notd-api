@@ -21,10 +21,6 @@ export async function validateSession({ headers }: Context): Promise<Session> {
     throw error(401);
   }
 
-  /**
-   * Session is marked as non nullable because it's already
-   * handled by @function .onBeforeHandle
-   */
   const { user } = session!;
 
   return { user };

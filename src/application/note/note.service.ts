@@ -38,6 +38,7 @@ export class NoteService {
   }
 
   delete(id: string) {
+    this.logger.info(`Deleted note ${id}`);
     return this.noteRepo.delete(id);
   }
 

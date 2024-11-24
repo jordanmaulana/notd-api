@@ -5,6 +5,7 @@ import { validateSession } from "../controllers/auth_controller";
 import {
   GetNotesSchema,
   CreateNoteSchema,
+  notesDocTag,
 } from "../../application/note/note.schema";
 
 export const noteRouter = new Elysia({ prefix: "/notes" })
@@ -30,17 +31,29 @@ export const noteRouter = new Elysia({ prefix: "/notes" })
     GetNotesSchema
   )
 
-  .get("/:id", async ({ params }) => {
-    const { id } = params;
-    const note = await noteService.getById(id);
-    return note;
-  })
+  .get(
+    "/:id",
+    async ({ params }) => {
+      const { id } = params;
+      const note = await noteService.getById(id);
+      return note;
+    },
+    {
+      detail: notesDocTag,
+    }
+  )
 
-  .delete("/:id", async ({ params }) => {
-    const { id } = params;
-    await noteService.delete(id);
-    return { message: `Note deleted` };
-  })
+  .delete(
+    "/:id",
+    async ({ params }) => {
+      const { id } = params;
+      await noteService.delete(id);
+      return { message: `Note deleted` };
+    },
+    {
+      detail: notesDocTag,
+    }
+  )
 
   .post(
     "/",

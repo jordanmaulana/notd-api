@@ -12,6 +12,10 @@ export const CreateNoteSchema = {
   },
 };
 
+export const notesDocTag = {
+  tags: ["Notes"],
+};
+
 export const GetNotesSchema = {
   query: t.Optional(
     t.Object({
@@ -38,7 +42,5 @@ export const GetNotesSchema = {
       ),
     })
   ),
-  detail: {
-    tags: ["Notes"],
-  },
+  detail: notesDocTag,
 };
