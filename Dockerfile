@@ -9,8 +9,8 @@ COPY ./prisma ./
 COPY . .
 
 # Install packages
-RUN bunx prisma generate
 RUN bun install --ignore-scripts
+RUN bunx prisma generate
 
 # Run app
 CMD ["bun", "dev"]
