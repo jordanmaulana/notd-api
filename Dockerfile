@@ -10,6 +10,7 @@ COPY . .
 
 # Install packages
 RUN bun install --ignore-scripts
+RUN bunx prisma migrate dev
 RUN bunx prisma generate
 
 # Run app
