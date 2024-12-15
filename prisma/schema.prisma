@@ -23,7 +23,7 @@ model Note {
   isPrivate Boolean  @default(true)
   tags      Tag[]
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }
 

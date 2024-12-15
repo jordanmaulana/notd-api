@@ -30,3 +30,5 @@ const app = new Elysia()
 console.log(
   `🦊 Notd API is running at ${app.server?.hostname}:${app.server?.port}`
 );
+
+export type App = typeof app 
