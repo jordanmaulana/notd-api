@@ -21,11 +21,16 @@ export class TagRepo {
     return newData;
   }
 
-  async getTagCounts() {
+  async getTagCounts({userId}:{userId:string}) {
     const tagCounts = await prisma.tag.groupBy({
       by: ["name"],
       _count: {
         name: true,
+      },
+      where: {
+        user: {
+          id: userId,
+        },
       },
     });
 
