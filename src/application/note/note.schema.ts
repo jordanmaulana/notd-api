@@ -23,14 +23,12 @@ export const GetNotesSchema = {
         t.String({
           description:
             "Narrow down by one or more tags. Example: #food #nasigoreng",
-          examples: "#food #nasigoreng",
         })
       ),
       isPrivate: t.Optional(
         t.Union([
           t.Boolean({
             description: "Filter by its privacy. Example: true",
-            examples: "true | false",
           }),
           t.Undefined(),
         ])
