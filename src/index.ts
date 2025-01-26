@@ -10,6 +10,10 @@ const app = new Elysia()
     swagger({
       path: "/docs",
       documentation: {
+        info: {
+          title: "Notd API Docs",
+          version: "1.0.0",
+        },
         tags: [{ name: "Auth" }, { name: "Notes" }],
       },
     })
@@ -31,4 +35,4 @@ console.log(
   `🦊 Notd API is running at ${app.server?.hostname}:${app.server?.port}`
 );
 
-export type App = typeof app 
+export type App = typeof app;
